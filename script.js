@@ -107,4 +107,31 @@
     });
   }
 
+  // ========== Agency Tabs ==========
+  const agencyTabs = document.querySelectorAll('.agency-tab');
+  const agencyPanels = document.querySelectorAll('.agency-panel');
+
+  agencyTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      const targetId = this.getAttribute('aria-controls');
+      const targetPanel = document.getElementById(targetId);
+
+      if (!targetPanel) return;
+
+      // Update tabs
+      agencyTabs.forEach(function (t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+
+      // Update panels
+      agencyPanels.forEach(function (panel) {
+        panel.classList.remove('active');
+      });
+      targetPanel.classList.add('active');
+    });
+  });
+
 })();
